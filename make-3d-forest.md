@@ -39,7 +39,7 @@ render_tree(sp2)
 render_tree(sp3)
 ```
 
-![](figures/unnamed-chunk-2-1.png)<!-- -->
+![](figures/species.png)<!-- -->
 
 ``` r
 # create dataset of trees, 50 individuals of each species
@@ -82,3 +82,6 @@ forest %>%
     filename = "figures/random-forest.png"
   )
 ```
+
+![](figures/random-forest.png)<!-- -->
+

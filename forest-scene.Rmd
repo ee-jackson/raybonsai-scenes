@@ -1,0 +1,75 @@
+---
+title: "Janzen-Connell 3D scene"
+author: "Eleanor Jackson"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output: 
+  github_document:
+    keep_html: true
+---
+
+```{r}
+library("rayrender")
+library("raybonsai")
+```
+
+## Define species 1
+
+```{r}
+generate_tree(seed = 1, branch_depth = 8, branch_color = "tan", leaf_color = "chartreuse4",
+                       leaf_depth_start = 5) %>% 
+  render_tree()
+```
+
+## Define species 2
+
+```{r}
+generate_tree(seed = 1, branch_depth = 8, branch_color = "tan",leaf_color = "darkgreen",
+                       leaf_depth_start = 3)%>% 
+  render_tree()
+```
+
+## Define focal species
+
+```{r}
+generate_tree(seed = 1, branch_angle_vert = seq(-30,30,by=5),
+              branch_depth = 8, leaf_color = "pink", leaf_depth_start = 5)%>% 
+  render_tree()
+```
+
+## Many trees
+
+```{r}
+tree1 <- generate_tree(x = c(0, 0, 0), seed = 2, branch_depth = 8, branch_color = "tan", leaf_color = "chartreuse4",
+                       leaf_depth_start = 5)
+tree2 <- generate_tree(x = c(5, 0, 0), seed = 1, branch_depth = 8, branch_color = "tan",leaf_color = "darkgreen",
+                       leaf_depth_start = 3)
+tree3 <- generate_tree(x = c(0, 2, 0), seed = 3333, branch_angle_vert = seq(-30,30,by=5),
+              branch_depth = 8, leaf_color = "pink", leaf_depth_start = 5)
+tree4 <- generate_tree(x = c(-5, 4, 0), seed = 4444, branch_angle_vert = c(-45,0,45),
+              branch_depth = 8 , leaf_color = "orange", branch_color = "tan", leaf_depth_start = 5, scale =0.5)
+tree5 <- generate_tree(x = c(3, 2, 0), seed = 2, branch_depth = 8, branch_color = "tan", leaf_depth_start = 5,
+                       leaf_color = "chartreuse4",)
+tree6 <- generate_tree(x = c(-6, 2, 0), seed = 4, branch_depth = 8, branch_color = "tan",leaf_color = "darkgreen",
+                       leaf_depth_start = 3)
+tree7 <- generate_tree(x = c(-2, 1, 0), seed = 5, branch_depth = 8, branch_color = "tan", leaf_depth_start = 5,
+                       leaf_color = "chartreuse4")
+tree8 <- generate_tree(x = c(-4, 0, 0), seed = 6, branch_depth = 8, branch_color = "tan",leaf_color = "darkgreen",
+                       leaf_depth_start = 3)
+tree9 <- generate_tree(x = c(-3, 0, 2), seed = 7, branch_angle_vert = seq(-30,30,by=5),
+              branch_depth = 8, leaf_color = "pink", leaf_depth_start = 5, scale = 0.5)
+
+# Background from here: https://hdrihaven.com/hdri/?c=nature&h=kiara_3_morning
+
+group_objects(tree1,pivot_point = c(0,-10,0), group_angle = c(0,0,10)) %>%
+  add_object(tree3) %>% 
+  add_object(tree4) %>% 
+  add_object(tree2) %>% 
+  add_object(tree5) %>% 
+  add_object(tree6) %>% 
+  add_object(tree7) %>% 
+  add_object(tree8) %>% 
+  add_object(tree9) %>% 
+  raybonsai::render_tree(samples=1000, lights = FALSE, environment_light = here::here("kiara_3_morning_2k.hdr"),
+              aperture=0.5, fov=24, lookfrom=c(0,8,30), width=1200, height=800, ground_radius = 500,
+              ground_color1 = "darkgreen", ground_color2 = "darkolivegreen", filename = "forest-scene.png")
+```

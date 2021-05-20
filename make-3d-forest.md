@@ -1,24 +1,29 @@
----
-title: "Forest 3D scene"
-author: "Eleanor Jackson"
-date: '`r format(Sys.time(), "%d %B, %Y")`'
-output: 
-  github_document:
-    keep_html: true
----
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.path="figures/")
-```
+Forest 3D scene
+================
+Eleanor Jackson
+20 May, 2021
 
-```{r}
+``` r
 library("rayrender")
 library("raybonsai")
 library("tidyverse")
 ```
 
+    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+
+    ## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+    ## ✓ tibble  3.1.2     ✓ dplyr   1.0.6
+    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+    ## ✓ readr   1.4.0     ✓ forcats 0.5.1
+
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## x ggplot2::arrow() masks rayrender::arrow()
+    ## x dplyr::filter()  masks stats::filter()
+    ## x dplyr::lag()     masks stats::lag()
+
 ## Create a forest of randomly placed individuals from three species
 
-```{r species}
+``` r
 # define species
 sp1 <- generate_tree(branch_depth = 8, branch_color = "tan", leaf_color = "chartreuse4",
                        leaf_depth_start = 5)
@@ -34,7 +39,9 @@ render_tree(sp2)
 render_tree(sp3)
 ```
 
-```{r, eval = FALSE}
+![](figures/unnamed-chunk-2-1.png)<!-- -->
+
+``` r
 # create dataset of trees, 50 individuals of each species
 trees_df <- tibble(sp = c("sp1", "sp2", "sp3"),
                    tree = list(sp1, sp2, sp3)) %>%

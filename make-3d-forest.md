@@ -95,7 +95,7 @@ random_forest %>%
   )
 ```
 
-<img src="/Users/eleanorjackson/Documents/my_R_projects/raybonsai-scenes/figures/random-forest.png" width="100%" />
+<img src="figures/random-forest.png" width="100%" />
 
 ## Create a forest of clustered individuals
 
@@ -180,4 +180,4 @@ forest_cl %>%
   )
 ```
 
-<img src="/Users/eleanorjackson/Documents/my_R_projects/raybonsai-scenes/figures/cluster-forest.png" width="100%" />
+<img src="figures/cluster-forest.png" width="100%" />
